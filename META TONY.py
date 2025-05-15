@@ -22,9 +22,6 @@ import os
 from colorama import Fore
 from shutil import get_terminal_size
 
-
-
-
 API_CONFIG = {
     "instagram_recovery_url": "https://i.instagram.com/api/v1/accounts/send_recovery_flow_email/",
     "ig_sig_key_version": "ig_sig_key_version",
@@ -49,7 +46,6 @@ API_CONFIG = {
     "durdurulmaz_domain": "@gmail.com"
 }
 
-
 E = '\033[1;31m'
 W9 = "\033[1m\033[34m"
 M = '\x1b[1;37m'
@@ -72,32 +68,22 @@ infoinsta = {}
 
 session = requests.Session()
 
-from colorama import Fore, init
-import pyfiglet
-
-init(autoreset=True)
-
-# Create ASCII art for "Pablo Escobar" with a medium-sized font
-ascii_art = pyfiglet.figlet_format("Tony Stark", font="small")
-
-# Add some color flair
-print(f"{Fore.YELLOW}{ascii_art}")
-print(f"{Fore.CYAN}Developed by @evrenisikti")
+print("«------------------------------𝐑𝐀𝐘𝐐------------------------------»")
+rayq = render('{RAYQ}', colors=['green', 'white'], align='center')
+print(rayq)
+print("«------------------------------𝐑𝐀𝐘𝐐------------------------------»")
 print("")
 
-ID = input("- İD GİR CANIM: ")
-TOKEN = input("- TOKEN GİR BALIM: ")
-
-
-
-    
+ID = input("- İD GİR: ")
+TOKEN = input("- TOKEN GİR: ")
+min_followers = int(input("- Minimum takipçi sayısını girin (ör. 100): "))
 
 def pppp():
     ge = hits               
     bt = bad_insta + bad_email 
     be = good_ig
     os.system('cls' if os.name == 'nt' else 'clear')       
-    print(f" 𝐌𝐄𝐓𝐀 𝐇𝐔𝐍𝐓𝐄𝐑 \r{C1}\n𝐇ı𝐭: {M}{ge} {E} \n𝐁𝐚𝐝: {HH}{bt} {W9}\n𝐅𝐚𝐥𝐬𝐞: {HH}  {M}{be} \n𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @evrenisikti  ")
+    print(f"\n 𝐌𝐄𝐓𝐀 𝐇𝐔𝐍𝐓𝐄𝐑 \r{C1}\n𝐇ı𝐭: {M}{ge} {E} \n𝐁𝐚𝐝: {HH}{bt} {W9}\n𝐅𝐚𝐬𝐥𝐞: {HH}  {M}{be} \n𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @Sah1bin ")
 
 def update_stats():
     pppp()
@@ -157,6 +143,7 @@ def otuzbir():
 
 otuzbir()
 
+
 def check_gmail(email):
     global bad_email, hits
     try:
@@ -196,7 +183,7 @@ def check_gmail(email):
     except Exception as e:
         print("check_gmail hata:", e)
         pass
-        
+
 def check(email):
     global good_ig, bad_insta
     ua = generate_user_agent()
@@ -319,27 +306,39 @@ def InfoAcc(username, domain):
         followers = int(followers)
     except:
         followers = 0
-    if followers < 100 :
-        return  
+    
+    # Sadece minimum takipçi filtresi
+    if followers < min_followers:
+        return
 
+    try:
+        is_business_api = account_info.get('is_business', False)
+        acct_type = str(account_info.get('account_type', ''))
+        is_business = bool(is_business_api) or (acct_type.upper() == 'BUSINESS')
+    except Exception as e:
+        is_business = False
+        print("Business flag parse error: {e}")
+
+    meta_status = "Meta Aktif ✅ " if followers > 99 else "Aktif Deği𝗅 ❌"
+    
     following = account_info.get('following_count', '')
     total_hits += 1
     info_text = f"""
-𝐓𝐎𝐍𝐘 𝐒𝐓𝐀𝐑𝐊 𝐍𝐄𝐖 𝐇𝐈𝐓
-<<════════𝐓𝐎𝐍𝐘════════>>
- 𝐇ı𝐭: {total_hits}
- 𝐔𝐬𝐞𝐫𝐧𝐚𝐦𝐞: {username}
- 𝐌𝐚ı𝐥: {username}@{domain}
- 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬: {followers}
- 𝐅𝐨𝐥𝐥𝐨𝐰ı𝐧𝐠: {following}
- 𝐃𝐚𝐭𝐞: {reg_date}
- 𝐁ı𝐨: {account_info.get('biography','')}
- 𝐑𝐞𝐬𝐭: {rest(username)}
- 𝐋ı𝐧𝐤: 
+«--------------------𝐑𝐀𝐘𝐐--------------------»
+• 𝖧𝗂𝗍𝗌: {total_hits}
+• 𝖴𝗌𝖾𝗋𝗇𝖺𝗆𝖾: {username}
+• 𝖬𝖺𝗂𝗅: {username}@{domain}
+• 𝖥𝗈𝗅𝗅𝗈𝗐𝖾𝗋𝗌: {followers}
+• 𝖥𝗈𝗅𝗅𝗈𝗐𝗂𝗇𝗀: {following}
+• 𝖬𝖾𝗍𝖺: {meta_status}
+• Meta Business: {is_business}
+• 𝖣𝖺𝗍𝖾: {reg_date}
+• 𝖡𝗂𝗈: {account_info.get('biography','')}
+• 𝖱𝖾𝗌𝗍: {rest(username)}
+• 𝖫𝗂𝗇𝗄: 
  https://www.instagram.com/{username}
-<<════════𝐓𝐎𝐍𝐘════════>>
-𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @evrenisikti
-
+«--------------------𝐑𝐀𝐘𝐐--------------------»
+𝖳𝖾𝗅𝖾𝗀𝗋𝖺𝗆: @Sah1bin
 """
     with open('tonyMetaHunting.txt', 'a') as f:
         f.write(info_text + "\n")
@@ -365,7 +364,8 @@ def durdurulmaz_python():
             username = account.get('username')
             if username:
                 followers = account.get('follower_count', 0)
-                if followers < 100:  
+                # Sadece minimum takipçi filtresi
+                if followers < min_followers:
                     continue
                 infoinsta[username] = account
                 email = username + API_CONFIG["durdurulmaz_domain"]
@@ -379,7 +379,6 @@ def stats_loop():
         time.sleep(1)
 
 Thread(target=stats_loop, daemon=True).start()
-
 
 for _ in range(100):
     Thread(target=durdurulmaz_python).start()
